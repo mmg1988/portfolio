@@ -1,0 +1,213 @@
+.page {
+  font-family: var(--font-cursive);
+  height: 100%;
+  padding: 5vh max((100% - 1440px) / 2, 10vw);
+}
+
+.nav {
+  font-size: clamp(.875em, 1vw, 1.25em);
+  display: flex;
+  justify-content: end;
+
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 2em;
+    margin: 0;
+    padding: 0;
+  }
+
+  li:hover {
+    color: white;
+  }
+}
+
+.section {
+  font-size: clamp(.875em, 1.5vw, 1.25em);
+  max-width: 1200px;
+  margin: 4em auto;
+  min-height: 90vh;
+
+  &:first-of-type {
+    margin-top: 1em;
+  }
+
+  &:last-of-type {
+    min-height: 50vh;
+  }
+
+  & > header {
+    margin-bottom: 2em;
+  }
+}
+
+.hello_section_wrapper {
+  padding: 2em 3em 3em 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.hello_section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3em;
+  flex-wrap: wrap;
+  min-height: 22em;
+
+  .bubble_picture {
+    border-radius: 100% 100% 0 100%;
+    display: flex;
+    overflow: hidden;
+    max-width: 10em;
+  
+    img {
+      width: 100%;
+    }
+  }
+
+  & > main {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    gap: 1em;
+    flex: 65%;
+  }
+}
+
+.title_1 {
+  font-size: 1.25em;
+}
+
+.title_2 {
+  font-size: 1.5em;
+}
+
+.title_3 {
+  font-size: 2.25em;
+}
+
+.title_4 {
+  font-size: 3em;
+}
+
+.text {
+  font-size: 1.125em;
+}
+
+.subtitle {
+  font-size: .875em;
+  text-transform: uppercase;
+}
+
+.contact_link {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  img {
+    width: 2em;
+  }
+}
+
+.button {
+  font-size: 1em;
+  padding: .5em 1.5em;
+  border-radius: 2em;
+  background: linear-gradient(45deg, #db0000cf, #e50084c4);
+  box-shadow: 0 4px 28px -13px rgba(0,0,0,0.5);
+
+  &:hover {
+    background: linear-gradient(45deg, #db0000, #e50084);
+  }
+}
+
+.gradient_name {
+  background: linear-gradient(10deg, #78e2c0, #2b82ff) text;
+  color: transparent;
+  font-weight: 500;
+}
+
+.neon_title {
+  font-family: var(--font-cursive);
+  color: #bcfcff;
+  text-shadow: 0 0 10px #a4ffea6e, 0 0 14px #87ffe33d, 0 0 18px #87ffe375;
+  animation: neon 5s ease infinite;
+}
+
+.gradient_title {
+  background: linear-gradient(45deg, #52b4e9, #c963a0) text;
+  color: transparent;
+}
+
+.cursor::before {
+  content: '|';
+  animation: caret 1.5s ease-in-out infinite;
+}
+
+.job_card {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2em;
+
+  & > header {
+    padding: 1em 2em 1em 1em;
+    flex: 12em;
+  }
+
+  & > main {
+    flex: 75%;
+  }
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875em;
+  gap: 0.25em;
+  padding: 0.125em 0.75em;
+  border-radius: 0.5em;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+
+  img {
+    width: 1em;
+  }
+}
+
+.animate {
+  transition: opacity 400ms 200ms linear, transform 500ms ease;
+  opacity: 0;
+  transform: scale3d(0.75, 0.75, 1) translateY(50%);
+  transform-origin: 50% 0;
+
+  &.enter {
+    opacity: 1;
+    transform: scale3d(1, 1, 1) translateY(0%);
+  }
+
+}
+
+@keyframes caret {
+  0%, 50%, 85%, 100% { opacity: 100%; }
+  55%, 80% { opacity: 0%; }
+}
+
+@keyframes neon {
+  0%, 10%, 11%, 13%, 16%, 17%, 25%, 26%, 100% {
+    opacity: 1;
+  }
+  10.5%, 13.5%, 16.5%, 25.5% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
