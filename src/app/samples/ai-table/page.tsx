@@ -5,8 +5,8 @@ import * as Styles from './styles';
 
 export default function Page() {
   const [message, setMessage] = useState('');
-  const [isLoading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  //const [isLoading, setLoading] = useState(false);
+  const [data] = useState([]);
 
   const sendPrompt = async () => {
     const result = await fetch(`/api/ai-json`, {
@@ -43,14 +43,14 @@ export default function Page() {
               </tr>
             </thead>
             <tbody>
-              {data.map(x => (
+              {/* {data.map(x => (
                 <tr key={x.email}>
                   <td>{x.firstName} {x.lastName}</td>
                   <td>{x.email}</td>
                   <td>{x.phoneNumber}</td>
                   <td>{x.street}, {x.city}, {x.state}, {x.country}, {x.zip}</td>
                 </tr>
-              ))}
+              ))} */}
             </tbody>
           </table>
         </Styles.TableContainer>
