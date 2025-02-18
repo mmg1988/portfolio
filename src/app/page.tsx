@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import styles from "./page.module.scss";
 import jobs from './jobs';
 import skills from './skills';
+import Image from 'next/image';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -34,34 +35,36 @@ export default function Home() {
           <nav className={styles.nav}>
             <ul>
               <li><a href={'#work'}>Work</a></li>
+              <li><a href={'#samples'}>Samples</a></li>
               <li><a href={'#about'}>About</a></li>
               <li><a href={'#contact'}>Contact</a></li>
             </ul>
           </nav>
           <div className={`${styles.hello_section}`}>
             <div className={styles.bubble_picture}>
-              <img src="/profile.png" alt="Mariano Gonzalez" />
+              <Image src="/profile.png" alt="Mariano Gonzalez" width={256} height={256} priority />
             </div>
             <main>
               <div>
                 <h1 className={styles.title_1}>Hi</h1>
                 <h1 className={styles.title_2}>I'm <span className={styles.gradient_name}>Mariano Gonzalez</span></h1>
                 <h2 className={styles.title_4}>
-                  <span className={styles.text}>Software Engineer <span className={styles.cursor}></span></span>
+                  <span className={styles.text}>Software </span>
+                  <span className={`${styles.text} ${styles.nowrap}`}>Engineer <span className={styles.cursor}></span></span>
                 </h2>
               </div>
               <p className={styles.text}>
                 Passionate self-taught <span className={'highlight'}>Full Stack</span> Developer with extensive experience on .NET technologies, <span className={'highlight'}>Frontend</span> frameworks (such as <span className={'highlight'}>Angular</span> and <span className={'highlight'}>React</span>), <span className={'highlight'}>UI/UX</span> skills and cloud environments.
               </p>
-              <div className={'flex gap-4 flex-wrap align-center'}>
+              <div className={'flex gap-4 flex-wrap align-center justify-end'}>
                 <a className={styles.contact_link} href={'mailto:mmg1988@gmail.com'}>
-                  <img src={'https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg'} />
+                  <Image src={'https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg'} alt={'Gmail'} width={64} height={64} />
                 </a>
                 <a className={styles.contact_link} href={'https://www.linkedin.com/in/mariano-gonzalez-576b8650/'} target={'_blank'}>
-                  <img src={'https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg'} />
+                  <Image src={'https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg'} alt={'LinkedIn'} width={64} height={64} />
                 </a>
                 <a className={styles.contact_link} href={'https://github.com/mmg1988/'} target={'_blank'}>
-                  <img src={'https://www.vectorlogo.zone/logos/github/github-tile.svg'} />
+                  <Image src={'https://www.vectorlogo.zone/logos/github/github-tile.svg'} alt={'GitHub'} width={64} height={64} />
                 </a>
                 <div className={'flex-item'}></div>
                 <a className={styles.button} href={'/resume - Mariano Gonzalez.pdf'} target="_blank">Resume</a>
@@ -74,7 +77,7 @@ export default function Home() {
         <header className={`text-center ${styles.animate}`}>
           <h1 className={styles.subtitle}>Follow me through my</h1>
           <h1 className={styles.title_3}>
-            <span className={styles.neon_title}>Profesional journey</span>
+            <span className={styles.neon_title}>Professional journey</span>
           </h1>
         </header>
         <main>
@@ -100,6 +103,33 @@ export default function Home() {
               </main>
             </div>
           ))}
+        </main>
+      </section>
+      <section id={'samples'} className={`${styles.section} ${styles.animate}`}>
+        <header className={`text-center ${styles.animate}`}>
+          <h1 className={styles.subtitle}>Play together on the</h1>
+          <h1 className={styles.title_3}>
+            <span className={styles.neon_title}>Playground</span>
+          </h1>
+        </header>
+        <main>
+          <p className={`text-center`}>
+            Some cool components and stuff I worked for learning and sharing.
+          </p>
+          <div className={'flex gap-2 justify-center'}>
+            <a className={`${styles.sample_card} box`} href={'/samples/pokedex'} target={'_blank'}>
+              <header className={styles.pokedex}>
+                <Image src={'/pokemon-logo.svg'} alt={'pokemon'} width={100} height={100} />
+              </header>
+              <main>
+                <div className={styles.title_1}>Pokedex</div>
+                <p>
+                  Responsive website for listing all pokemon, look their abilities, stats, etc.<br />
+                  It's designed with a glassmorphism style and flip cards as animated effect!
+                </p>
+              </main>
+            </a>
+          </div>
         </main>
       </section>
       <section id={'about'} className={`${styles.section} ${styles.animate} flex-column gap-4`}>
@@ -129,7 +159,7 @@ export default function Home() {
         <div className={'flex gap-1 flex-wrap justify-center headline-6'}>
           {skills.map(skill => (
             <div key={skill.name} className={styles.tag}>
-              {skill.icon && <img src={skill.icon} />}
+              {skill.icon && <Image src={skill.icon} alt={skill.name} width={24} height={24} />}
               <span>{skill.name}</span>
             </div>
           ))}
@@ -142,13 +172,13 @@ export default function Home() {
           </p>
           <div className={'flex gap-4 flex-wrap justify-center'}>
             <a className={styles.contact_link} href={'mailto:mmg1988@gmail.com'}>
-              <img src={'https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg'} />
+              <Image src={'https://www.vectorlogo.zone/logos/gmail/gmail-icon.svg'} alt={'Gmail'} width={64} height={64} />
             </a>
             <a className={styles.contact_link} href={'https://www.linkedin.com/in/mariano-gonzalez-576b8650/'} target={'_blank'}>
-              <img src={'https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg'} />
+              <Image src={'https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg'} alt={'LinkedIn'} width={64} height={64} />
             </a>
             <a className={styles.contact_link} href={'https://github.com/mmg1988/'} target={'_blank'}>
-              <img src={'https://www.vectorlogo.zone/logos/github/github-tile.svg'} />
+              <Image src={'https://www.vectorlogo.zone/logos/github/github-tile.svg'} alt={'GitHub'} width={64} height={64} />
             </a>
           </div>
         </main>

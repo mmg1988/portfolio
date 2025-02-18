@@ -20,7 +20,6 @@ body {
 
 body {
   color: var(--foreground);
-  background: no-repeat fixed center / cover url("/blob-scene-haikei.svg");
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -35,6 +34,10 @@ h1, h2, h3, h4, h5, h6 {
 
 * {
   box-sizing: border-box;
+}
+
+input, button, select {
+  font-family: var(--font-sans);
 }
 
 a {
