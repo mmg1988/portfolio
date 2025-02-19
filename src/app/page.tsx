@@ -129,6 +129,18 @@ export default function Home() {
                 </p>
               </main>
             </a>
+            <a className={`${styles.sample_card} box`} href={'/samples/ai-table'} target={'_blank'}>
+              <header className={styles.ai_data_gen}>
+                <i className={'material-symbols-outlined'}>network_intelligence</i>
+              </header>
+              <main>
+                <div className={styles.title_1}>AI DataGen</div>
+                <p>
+                  A data generation tool for random real data based on user prompt.<br />
+                  It's using OpenAI api to generate a JSON that then it's converted in a table
+                </p>
+              </main>
+            </a>
           </div>
         </main>
       </section>

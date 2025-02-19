@@ -36,7 +36,7 @@ export const PromptInput = styled.div`
   }
 `;
 
-export const IconButton = styled.button`
+export const SendButton = styled.button`
   position: absolute;
   bottom: 1em;
   right: 1em;
@@ -47,13 +47,45 @@ export const IconButton = styled.button`
   outline: 0;
   line-height: 0;
   border-radius: 2em;
-  background: #E1003E;
-  color: rgba(255, 255, 255, 0.72);
+  background: white;
+  color: rgba(0, 0, 0, 0.72);
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: #2E2E2E;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  i {
+    font-size: 2em;
+  }
+`;
+
+export const Error = styled.div`
+  text-align: center;
+  font-size: 1.25em;
+`;
+
+export const EditButton = styled.button`
+  font-family: inherit;
+  font-size: 0.75em;
+  padding: 0.25em;
+  border: 0;
+  outline: 0;
+  line-height: 0;
+  border-radius: 2em;
+  background: white;
+  color: rgba(0, 0, 0, 0.72);
   cursor: pointer;
 
   &:hover {
-    background: #ee2c61;
-    color: rgba(255, 255, 255, 0.88);
+    background: #2E2E2E;
+    color: rgba(255, 255, 255, 0.72);
   }
 
   i {
@@ -62,15 +94,16 @@ export const IconButton = styled.button`
 `;
 
 export const TableContainer = styled.div`
-  --table-background: rgb(255, 255, 255);
+  --table-background: rgb(45, 45, 45);
   --border-radius: 6px;
-  --border-color: rgba(0, 0, 0, 0.15);
+  --border-color: rgba(255, 255, 255, 0.08);
   --border-style: 1px solid var(--border-color);
-  --hover-color: rgba(0, 0, 0, 0.04);
+  --hover-color: rgba(255, 255, 255, 0.04);
   background: var(--table-background);
-  color: rgba(0, 0, 0, 0.73);
+  color: rgba(255, 255, 255, 0.86);
   border-radius: var(--border-radius);
   border: var(--border-style);
+  min-height: 0;
   overflow: auto;
 
   table {
@@ -90,6 +123,8 @@ export const TableContainer = styled.div`
     position: sticky;
     top: 0;
     z-index: 2;
+    cursor: pointer;
+    user-select: none;
   }
 
   th, td {
@@ -98,19 +133,35 @@ export const TableContainer = styled.div`
     white-space: nowrap;
   }
 
-  tr th:first-child {
+  tr th:first-of-type {
     left: 0;
     z-index: 3;
   }
 
-  tr td:first-child {
+  tr td:first-of-type {
     background: var(--table-background);
     position: sticky;
     left: 0;
+    width: 1px;
     z-index: 2;
   }
 
   tr:hover td {
     background: var(--hover-color);
   }
+`;
+
+export const SortIcon = styled.span<{ active: boolean, dir: 'asc' | 'desc' }>`
+  position: relative;
+  font-family: 'Material SYmbols Outlined';
+  font-size: 24px;
+  font-weight: 600;
+  width: 1em;
+  line-height: 1;
+
+  ${({ active, dir }) => active && `
+    ::after {
+      content: "${dir === 'asc' ? 'arrow_downward' : 'arrow_upward'}";
+    }
+  `}
 `;

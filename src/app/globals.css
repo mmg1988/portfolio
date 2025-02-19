@@ -133,12 +133,21 @@ a {
   flex-direction: column;
 }
 
+.flex-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .flex-item {
   flex: auto;
 }
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.adjust-v {
+  min-height: 0;
 }
 
 .align-start {
@@ -191,4 +200,12 @@ a {
 
 .text-center {
   text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
 }
