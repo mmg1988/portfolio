@@ -1,5 +1,7 @@
 import OpenAI from 'openai';
 
+export const maxDuration = 100;
+
 export async function POST(request: Request) {
   const { message } = await request.json();
   const openai = new OpenAI({
