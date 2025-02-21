@@ -116,7 +116,7 @@ export default function Home() {
           <p className={`text-center`}>
             Some cool components and stuff I worked for learning and sharing.
           </p>
-          <div className={'flex gap-2 justify-center'}>
+          <div className={'flex gap-2 justify-center flex-wrap'}>
             <a className={`${styles.sample_card} box`} href={'/samples/pokedex'} target={'_blank'}>
               <header className={styles.pokedex}>
                 <Image src={'/pokemon-logo.svg'} alt={'pokemon'} width={100} height={100} />
@@ -137,7 +137,19 @@ export default function Home() {
                 <div className={styles.title_1}>AI DataGen</div>
                 <p>
                   A data generation tool for random real data based on user prompt.<br />
-                  It's using OpenAI api to generate a JSON that then it's converted in a table
+                  It's using OpenAI api to generate a JSON that then it's converted into a table
+                </p>
+              </main>
+            </a>
+            <a className={`${styles.sample_card} box`} href={'/samples/queue-simulator'} target={'_blank'}>
+              <header className={styles.queue_simulator}>
+                <i className={'material-symbols-outlined'}>horizontal_split</i>
+              </header>
+              <main>
+                <div className={styles.title_1}>Queue system simulator</div>
+                <p>
+                  A simulator to study and visualize how different events can flow and bottle-neck different processes<br />
+                  It's using promises in order to simulate queueing, consumers and processing time.
                 </p>
               </main>
             </a>

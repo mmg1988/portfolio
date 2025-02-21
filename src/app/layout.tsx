@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/google-font-display */
 import type { Metadata } from "next";
 import { Roboto as Sans, Roboto_Mono as Mono, Tilt_Neon as Cursive } from "next/font/google";
+import { Analytics } from '@vercel/analytics/next';
 import "./globals.css";
 
 const fontSans = Sans({
@@ -38,6 +39,7 @@ export default function RootLayout({
       </head>
       <body className={`${fontSans.variable} ${fontMono.variable} ${fontCursive.variable}`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );

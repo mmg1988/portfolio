@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     emotion: true
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         hostname: 'assets.pokemon.com'

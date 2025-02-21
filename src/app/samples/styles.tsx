@@ -28,5 +28,7 @@ export const Layout = styled.div`
 
   ::-webkit-scrollbar-thumb:hover, *::-webkit-scrollbar-thumb:hover {
     background: #9F9F9F;
+    border: 3px solid transparent;
+    background-clip: padding-box;
   }
 `;
