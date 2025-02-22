@@ -39,10 +39,6 @@ export const SearchInput = styled.div`
   input::placeholder {
     color: rgba(255, 255, 255, 0.4);
   }
-  
-  i {
-    font-weight: 600;
-  }
 `;
 
 export const NoResults = styled.div`
@@ -55,7 +51,6 @@ export const NoResults = styled.div`
 
   i {
     font-size: 6em;
-    font-weight: 600;
   }
 `;
 

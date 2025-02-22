@@ -143,7 +143,7 @@ export default function Home() {
             </a>
             <a className={`${styles.sample_card} box`} href={'/samples/queue-simulator'} target={'_blank'}>
               <header className={styles.queue_simulator}>
-                <i className={'material-symbols-outlined'}>horizontal_split</i>
+                <i className={'material-symbols-outlined'}>view_list</i>
               </header>
               <main>
                 <div className={styles.title_1}>Queue system simulator</div>

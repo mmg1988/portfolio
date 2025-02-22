@@ -30,10 +30,6 @@ export const PromptInput = styled.div`
   textarea::placeholder {
     color: rgba(255, 255, 255, 0.4);
   }
-  
-  i {
-    font-weight: 600;
-  }
 `;
 
 export const SendButton = styled.button`
@@ -155,7 +151,6 @@ export const SortIcon = styled.span<{ active: boolean, dir: 'asc' | 'desc' }>`
   position: relative;
   font-family: 'Material SYmbols Outlined';
   font-size: 24px;
-  font-weight: 600;
   width: 1em;
   line-height: 1;
 

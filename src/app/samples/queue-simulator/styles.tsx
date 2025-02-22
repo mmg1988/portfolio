@@ -38,7 +38,6 @@ export const Instance = styled.div<{ active: boolean }>`
         transform: translate3d(-50%, -50%, 0);
         font-family: 'Material SYmbols Outlined';
         font-size: 48px;
-        font-weight: 600;
         line-height: 1;
         padding: 0;
         border-radius: 50%;
@@ -113,6 +112,5 @@ export const IconButton = styled.button`
 
   i {
     font-size: 1em;
-    font-weight: 600;
   }
 `;

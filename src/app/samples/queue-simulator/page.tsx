@@ -130,9 +130,9 @@ export default function Page() {
             <div key={i}>{cmd}</div>
           ))}
         </Styles.Console>
-        <div className={'flex gap-1 flex-wrap justify-center'} style={{ flex: '800px', maxWidth: '100%' }}>
+        <div className={'flex gap-1 flex-wrap justify-center adjust-w'} style={{ flex: '800px', maxWidth: '100%' }}>
           {services.map(service => (
-            <div key={service.name} className={'flex-column gap-1 flex-item'} style={{ flex: '0 0 calc(50% - 1em)', width: '400px', maxWidth: '100%' }}>
+            <div key={service.name} className={'flex-column gap-1 flex-item adjust-w'} style={{ flex: '0 1 max(calc(50% - 0.5em), 400px)', maxWidth: '100%' }}>
               <Styles.Service className={'box'}>
                 <div>&lt;Service {service.name}&gt;</div>
                 <div className={'flex flex-wrap gap-2 align-start'}>
