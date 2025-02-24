@@ -19,12 +19,6 @@ export const Instance = ({
   const queues = useAppSelector(store => store.queues);
   const dispatch = useAppDispatch();
   const processor = useRef<() => void>(() => {});
-
-  useEffect(() => {
-    if (status == 'starting') {
-      processor.current();
-    }
-  }, [status]);
   
   const delay = (timeMs: number) => new Promise((resolve) => setTimeout(resolve, timeMs));
   const process = useCallback(() => new Promise(() => {
@@ -51,7 +45,10 @@ export const Instance = ({
 
   useEffect(() => {
     processor.current = process;
-  }, [process]);
+    if (status == 'starting') {
+      processor.current();
+    }
+  }, [status, process]);
 
   const toggle = () => {
     if (status == 'stopped') {
