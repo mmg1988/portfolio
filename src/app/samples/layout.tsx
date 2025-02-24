@@ -1,4 +1,8 @@
+'use client'
+
+import { Provider } from 'react-redux';
 import * as Styles from './styles';
+import { store } from './store';
 
 export default function SamplesLayout({
   children,
@@ -6,8 +10,10 @@ export default function SamplesLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Styles.Layout>
-      {children}
-    </Styles.Layout>
+    <Provider store={store}>
+      <Styles.Layout>
+        {children}
+      </Styles.Layout>
+    </Provider>
   );
 }

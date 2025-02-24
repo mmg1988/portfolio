@@ -3,6 +3,8 @@
 import { KeyboardEvent, useState } from 'react';
 import * as Styles from './styles';
 import { Spinner } from '@/app/_components/spinner';
+import { IconButton } from '@/app/_components/icon-button';
+import { DataGrid } from '@/app/_components/data-grid';
 
 export default function Page() {
   const [message, setMessage] = useState('');
@@ -10,8 +12,6 @@ export default function Page() {
   const [error, setError] = useState('');
   const [columns, setColumns] = useState<{ field: string, name: string, numeric: boolean }[]>([]);
   const [data, setData] = useState([]);
-  const [sortBy, setSortBy] = useState('');
-  const [sortDir, setSortDir] = useState(1);
 
   const sendPrompt = async () => {
     setLoading(true);
@@ -67,30 +67,6 @@ export default function Page() {
     setData([]);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const extractValue = (item: any, field: string) => {
-    const splits = field.split('.');
-    const value = splits.length > 1 ? item[splits[0]][splits[1]] : item[splits[0]];
-    return Array.isArray(value) || value instanceof Object ? JSON.stringify(value) : value;
-  };
-
-  const handleSortColumn = (field: string) => {
-    const newSortDir = sortDir * -1;
-    setSortBy(field);
-    setSortDir(newSortDir);
-    const sorted = data.sort((a, b) => {
-      const aVal = extractValue(a, field);
-      const bVal = extractValue(b, field);
-      let result = 0;
-      if (!isNaN(aVal))
-        result = aVal - bVal;
-      else
-        result = aVal > bVal ? 1 : -1;
-      return result * sortDir;
-    });
-    setData(sorted);
-  };
-
   const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -119,8 +95,14 @@ export default function Page() {
                   onChange={e => setMessage(e.target.value)}
                   onKeyDown={handleKeyPress}
                 />
-                <Styles.SendButton type={'submit'} disabled={!message}>
-                  <i className={'material-symbols-outlined'}>prompt_suggestion</i>
+                <Styles.SendButton>
+                  <IconButton
+                    size={'lg'}
+                    type={'submit'}
+                    disabled={!message}
+                  >
+                    <i className={'material-symbols-outlined'}>prompt_suggestion</i>
+                  </IconButton>
                 </Styles.SendButton>
               </Styles.PromptInput>
               {error && <Styles.Error>{error}</Styles.Error>}
@@ -132,40 +114,14 @@ export default function Page() {
         <div className={'flex-column gap-2 adjust-v'}>
           <div className={'flex align-center'}>
             <div className={'flex-item body-2'}>prompt: {message}</div>
-            <Styles.EditButton onClick={reset}>
+            <IconButton onClick={reset}>
               <i className={'material-symbols-outlined'}>edit</i>
-            </Styles.EditButton>
+            </IconButton>
           </div>
-          <Styles.TableContainer>
-            <table>
-              <thead>
-                <tr>
-                  {columns.map(col => (
-                    <th key={col.field} onClick={() => handleSortColumn(col.field)}>
-                      <div className={`flex align-center ${col.numeric ? 'justify-start flex-reverse' : ''}`}>
-                        <span>{col.name}</span>
-                        <Styles.SortIcon
-                          active={col.field == sortBy}
-                          dir={sortDir == 1 ? 'asc' : 'desc'}
-                        />
-                      </div>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item, i) => (
-                  <tr key={item['id'] ?? i}>
-                    {columns.map(col => (
-                      <td key={col.field} className={col.numeric ? 'text-right' : 'text-left'}>
-                        {extractValue(item, col.field)}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </Styles.TableContainer>
+          <DataGrid
+            columns={columns}
+            items={data}
+          />
         </div>
       }
       <div className={'flex-item'}></div>
