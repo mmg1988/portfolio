@@ -23,9 +23,9 @@ export const queuesSlice = createSlice({
       state[action.payload.queue].counter++;
       state[action.payload.queue].messages.push(action.payload.message);
     },
-    dequeue: (state, action: PayloadAction<{ queue: string, message: string }>) => {
-      const index = state[action.payload.queue]?.messages?.indexOf(action.payload.message);
-      state[action.payload.queue]?.messages?.splice(index, 1);
+    dequeue: (state, action: PayloadAction<{ queue: string, message?: string }>) => {
+      const [message] = state[action.payload.queue]?.messages?.splice(0, 1);
+      action.payload.message = message;
     }
   }
 });

@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import * as Styles from './styles';
 import { enqueue } from './queues-slice';
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -12,6 +12,18 @@ export const Console = ({
   const commands = useAppSelector(store => store.commands);
   const queues = useAppSelector(store => store.queues);
   const dispatch = useAppDispatch();
+  const intervalRef = useRef<() => void>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (intervalRef.current)
+          intervalRef.current();
+    }, 1000 / speed);
+    
+    return () => {
+      clearInterval(interval);
+    };
+  }, [speed]);
 
   const sendRandomCommand = useCallback(() => {
     const broadcast = Math.random() > 0.75;
@@ -33,11 +45,8 @@ export const Console = ({
   }, [dispatch, queues]);
 
   useEffect(() => {
-    const interval = setInterval(sendRandomCommand, 1000 / speed);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [sendRandomCommand, speed]);
+    intervalRef.current = sendRandomCommand;
+  }, [sendRandomCommand]);
 
   return (
     <Styles.Console className={'box'}>

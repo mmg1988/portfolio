@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { add } from './commands-slice';
 import { IService } from './service';
 
+type Status = 'starting' | 'ready' | 'processing' | 'stopped';
+
 export const Instance = ({
   id,
   service,
@@ -14,41 +16,43 @@ export const Instance = ({
   service: IService,
   speed: number
 }>) => {
-  const [status, setStatus] = useState('starting');
+  const [status, setStatus] = useState<Status>('starting');
   const [message, setMessage] = useState<string | null>();
   const queues = useAppSelector(store => store.queues);
   const dispatch = useAppDispatch();
-  const processor = useRef<() => void>(() => {});
+  const processRef = useRef<() => void>(null);
+
+  useEffect(() => {
+    if (status == 'ready' && queues[service.queue]?.messages?.length >= 1) {
+      processRef.current!();
+    }
+  }, [status, queues, service.queue]);
   
   const delay = (timeMs: number) => new Promise((resolve) => setTimeout(resolve, timeMs));
-  const process = useCallback(() => new Promise(() => {
-    let ms = 50 / speed;
-    if (status == 'destroyed') {
+  const process = useCallback(() => new Promise(async () => {
+    if (status == 'stopped') {
       return;
-    } else if (status == 'stopped') {
-      return delay(ms).then(() => processor.current());
     }
-    const message = queues[service.queue]?.messages?.[0];
-    let newStatus = 'ready';
+    const { payload: { message } } = dispatch(dequeue({ queue: service.queue }));
     if (message) {
-      dispatch(dequeue({ queue: service.queue, message }));
-      newStatus = 'processing';
-      ms = (1000 + Math.random() * 6000) / speed;
-      dispatch(add(`[${id}] CONSUMING ${message}`));
+      const timeMs = (1000 + Math.random() * 6000) / speed;
+      dispatch(add(`[${id}] <${service.name}> CONSUMING ${message}`));
+      setStatus('processing')
       setMessage(message);
+      return delay(timeMs).then(() => processRef.current!());
     } else {
       setMessage(null);
     }
-    setStatus(newStatus);
-    return delay(ms).then(() => processor.current());
-  }), [speed, status, queues, service.queue, dispatch, id]);
+    setStatus('ready');
+  }), [status, dispatch, service.queue, service.name, speed, id]);
 
   useEffect(() => {
-    processor.current = process;
-    if (status == 'starting') {
-      processor.current();
+    const start = processRef.current == null;
+    processRef.current = process;
+    if (start) {
+      process();
     }
-  }, [status, process]);
+  }, [process]);
 
   const toggle = () => {
     if (status == 'stopped') {
@@ -57,7 +61,6 @@ export const Instance = ({
       setStatus('stopped');
       setMessage(null);
     }
-    
   };
   
   return (
