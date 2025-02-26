@@ -4,6 +4,7 @@ import * as Styles from './styles';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { add } from './commands-slice';
 import { IService } from './service';
+import { delay } from '@/app/_components/tools';
 
 type Status = 'starting' | 'ready' | 'processing' | 'stopped';
 
@@ -23,12 +24,19 @@ export const Instance = ({
   const processRef = useRef<() => void>(null);
 
   useEffect(() => {
+    setStatus('ready');
+
+    return () => {
+      setStatus('stopped');
+    };
+  }, []);
+
+  useEffect(() => {
     if (status == 'ready' && queues[service.queue]?.messages?.length >= 1) {
       processRef.current!();
     }
   }, [status, queues, service.queue]);
   
-  const delay = (timeMs: number) => new Promise((resolve) => setTimeout(resolve, timeMs));
   const process = useCallback(() => new Promise(async () => {
     if (status == 'stopped') {
       return;

@@ -179,8 +179,8 @@ export default function Home() {
             </p>
           </main>
         </div>
-        <p className={`${styles.subtitle} text-center`}>I'm constantly improving my stack</p>
-        <div className={'flex gap-1 flex-wrap justify-center headline-6'}>
+        <p className={`${styles.subtitle} text-center ${styles.animate}`}>I'm constantly improving my stack</p>
+        <div className={`flex gap-1 flex-wrap justify-center headline-6 ${styles.animate}`}>
           {skills.map(skill => (
             <div key={skill.name} className={styles.tag}>
               {skill.icon && <Image src={skill.icon} alt={skill.name} width={24} height={24} />}
